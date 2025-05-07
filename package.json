@@ -10,7 +10,7 @@
   "license": "MIT",
   "author": "francis wayungi",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "screenshot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
