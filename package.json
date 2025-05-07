@@ -1,0 +1,17 @@
+{
+  "name": "web-spy",
+  "version": "1.0.0",
+  "description": "application that navigates to a url and takes a screen shot",
+  "keywords": [
+    "scrape",
+    "spy",
+    "monitor"
+  ],
+  "license": "MIT",
+  "author": "francis wayungi",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
