@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Website Screenshot Viewer</title>
-</head>
-<body>
-  <% if (screenshotPath) { %>
-    <img src="<%= screenshotPath %>" alt="Latest Screenshot" width="800">
-  <% } %>
-</body>
+  <head>
+    <meta http-equiv="refresh" content="10" />
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Website Screenshot Viewer</title>
+  </head>
+  <body>
+    <div>
+        <% if (screenshotPath) { %>
+            <img src="<%= screenshotPath %>" alt="Latest Screenshot" width="100%" />
+        <% } %>
+    </div>
+  </body>
 </html>

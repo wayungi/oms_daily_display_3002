@@ -40,7 +40,9 @@ app.get('/', (req, res) => {
     const screenshotPath = path.join(screenshotsDir, screenshotFilename);
     await page.screenshot({ path: screenshotPath, fullPage: true });
     latestScreenshot = `screenshots/${screenshotFilename}`;
-    console.log(`Captured another screenshot at ${new Date().toLocaleTimeString()}`);
+    console.log(`
+      Captured another screenshot at ${new Date().toLocaleTimeString()}\n filename is${latestScreenshot}`
+    );
   }
 
   // await browser.close();
