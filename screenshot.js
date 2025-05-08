@@ -16,6 +16,14 @@ if (!fs.existsSync(screenshotsDir)) {
   fs.mkdirSync(screenshotsDir, { recursive: true });
 }
 
+let latestScreenshot = 'screenshots/screenshot.png';
+
+// Route to render the homepage
+app.get('/', (req, res) => {
+  res.render('index', { screenshotPath: latestScreenshot });
+});
+
+
 
 (async () => {
   const url = 'https://oms-weekly-display.paytronix.co.ug';
