@@ -4,14 +4,7 @@
   <title>Website Screenshot Viewer</title>
 </head>
 <body>
-  <h1>Enter a URL to Capture Screenshots</h1>
-  <!-- <form action="/start" method="POST">
-    <input type="text" name="url" placeholder="https://example.com" required>
-    <button type="submit">Start Capturing</button>
-  </form> -->
-
   <% if (screenshotPath) { %>
-    <h2>Latest Screenshot:</h2>
     <img src="<%= screenshotPath %>" alt="Latest Screenshot" width="800">
   <% } %>
 </body>

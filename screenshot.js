@@ -5,7 +5,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3002;
+const PORT = 3002;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,17 +18,9 @@ if (!fs.existsSync(screenshotsDir)) {
 
 let latestScreenshot = 'screenshots/screenshot.png';
 
-// Route to render the homepage
 app.get('/', (req, res) => {
   res.render('index', { screenshotPath: latestScreenshot });
 });
-
-app.post('/start', async (req, res) => {
-  const url = req.body.url;
-  if (!url) {
-    return res.redirect('/');
-  }
-
 
 
 (async () => {
@@ -43,12 +35,17 @@ app.post('/start', async (req, res) => {
  
   while (true) {
     await new Promise(r => setTimeout(r, 14000)); /***  wait 14 seconds to ensure complete loading ***/
-    await page.screenshot({ path: `screenshots/screenshot.png`, fullPage: true });
-    console.log(`Captured screenshot.png`);
+    const timestamp = Date.now();
+    const screenshotFilename = `screenshot-${timestamp}.png`;
+    const screenshotPath = path.join(screenshotsDir, screenshotFilename);
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+    latestScreenshot = `screenshots/${screenshotFilename}`;
+    console.log(`Captured another screenshot at ${new Date().toLocaleTimeString()}`);
   }
 
   // await browser.close();
 })();
 
-
-
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
