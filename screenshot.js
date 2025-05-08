@@ -23,6 +23,12 @@ app.get('/', (req, res) => {
   res.render('index', { screenshotPath: latestScreenshot });
 });
 
+app.post('/start', async (req, res) => {
+  const url = req.body.url;
+  if (!url) {
+    return res.redirect('/');
+  }
+
 
 
 (async () => {
