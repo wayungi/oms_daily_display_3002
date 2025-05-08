@@ -1,4 +1,21 @@
+const express =  require('express');
 const puppeteer = require('puppeteer');
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3002;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+
+const screenshotsDir = path.join(__dirname, 'public', 'screenshots');
+if (!fs.existsSync(screenshotsDir)) {
+  fs.mkdirSync(screenshotsDir, { recursive: true });
+}
+
 
 (async () => {
   const url = 'https://oms-weekly-display.paytronix.co.ug';
