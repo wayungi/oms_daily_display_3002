@@ -24,29 +24,39 @@ app.get("/", (req, res) => {
 
 (async () => {
   const url = "https://oms-weekly-display.paytronix.co.ug";
+  let toggle = true;
 
   const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
+
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 800 });
-  await page.goto(url, { waitUntil: "networkidle0" });
+  await page.goto(url); //omited waitUntil: "networkidle0" to allow the page to load completely
 
   while (true) {
-    await new Promise((r) =>
-      setTimeout(r, 14000)
-    ); 
+    await page.reload({ waitUntil: "networkidle0" });
+    const waitTime = toggle ? 0 : 49000;
+    console.log(`Waiting for ${waitTime / 1000} seconds...`);
+    await new Promise((r) => setTimeout(r, waitTime));
+
     const timestamp = Date.now();
     const screenshotFilename = `screenshot-${timestamp}.png`;
     const screenshotPath = path.join(screenshotsDir, screenshotFilename);
     await page.screenshot({ path: screenshotPath, fullPage: true });
     latestScreenshot = `screenshots/${screenshotFilename}`;
-    console.log(`
-      Captured another screenshot at ${new Date().toLocaleTimeString()}\n filename is${latestScreenshot}`);
-  }
+    console.log(
+      `Captured another screenshot at ${new Date().toLocaleTimeString()}\t filename is${latestScreenshot}`
+    );
 
-  // await browser.close();
+    if (!toggle) {
+      await new Promise((r) => setTimeout(r, 49000));
+    }
+    
+    toggle = !toggle;
+  }
+  //await browser.close();
 })();
 
 app.listen(PORT, () => {
