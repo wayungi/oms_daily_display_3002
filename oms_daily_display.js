@@ -5,7 +5,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = 3002;
+const PORT = 3003;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 (async () => {
-  const url = "https://oms-weekly-display.paytronix.co.ug";
+  const url = "https://oms-daily-display.paytronix.co.ug";
   let toggle = true;
 
   const browser = await puppeteer.launch({
